@@ -1,10 +1,10 @@
 /*
  * 
  */
-package locamobil.dao;
+package locamobil.model.dao;
 
 /**
- * 
+ * git status
  * @author Marcos
  */
 public class ConexaoSQLite {
