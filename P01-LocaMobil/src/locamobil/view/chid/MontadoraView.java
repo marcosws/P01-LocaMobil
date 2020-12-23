@@ -5,7 +5,6 @@
  */
 package locamobil.view.chid;
 
-import java.awt.event.ActionEvent;
 import locamobil.view.util.PrincipalDimensao;
 
 /**
@@ -41,29 +40,28 @@ public class MontadoraView extends ControleChild {
     }
     
     @Override
-    public void actionPerformed(ActionEvent evento) {
-        
-        if(evento.getSource().equals(botaoIncluir)){
-            
-        }
-        else if(evento.getSource().equals(botaoAlterar)){
-                
-        }
-        else if(evento.getSource().equals(botaoExcluir)){
-                
-        }
-        else if(evento.getSource().equals(botaoConsultar)){
-                
-        }
-        else if(evento.getSource().equals(botaoCancelar)){
-                
-        }
-        else if(evento.getSource().equals(botaoConfirmar)){
-                
-        }
-        else if(evento.getSource().equals(botaoFechar)){
-                
-        }
+    public void incluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void alterar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void excluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void consultar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void habilitaCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

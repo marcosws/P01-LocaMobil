@@ -7,6 +7,7 @@ package locamobil.view.util;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import locamobil.model.util.DadosArqProperties;
 
 /**
  *
@@ -27,7 +28,8 @@ public class StatusBar extends JLabel{
     public StatusBar() {
         super();
         super.setPreferredSize(new Dimension(100, 18));
-        this.textoMensagem("LocaMobil - Sistema para locação de veículos.");
+        DadosArqProperties dadosArqProperties = new DadosArqProperties();
+        this.textoMensagem("LocaMobil - Sistema para locação de veículos | Usuário: " + UsuarioLogado.getNomeUsuario() + " | Banco de Dados: " + dadosArqProperties.getNameDataBase());
     }
     
     private void textoMensagem(String msg){

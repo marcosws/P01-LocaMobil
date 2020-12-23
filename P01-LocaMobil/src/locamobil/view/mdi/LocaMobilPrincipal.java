@@ -15,15 +15,17 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import locamobil.global.util.Mensagens;
 import locamobil.view.chid.CategoriaView;
 import locamobil.view.chid.ClienteView;
 import locamobil.view.chid.MontadoraView;
-import locamobil.view.chid.NomeVeiculoView;
-import locamobil.view.chid.TipoCombustivelView;
+import locamobil.view.chid.ModeloView;
+import locamobil.view.chid.CombustivelView;
 import locamobil.view.chid.UsuarioView;
 import locamobil.view.chid.VeiculoView;
 import locamobil.view.util.PrincipalDimensao;
 import locamobil.view.util.StatusBar;
+import locamobil.view.util.UsuarioLogado;
 
 /**
  *
@@ -43,9 +45,9 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
     private final JMenu menuAjuda;
     
     private final JMenuItem menuItemMontadora;
-    private final JMenuItem menuItemNomeVeiculo;
+    private final JMenuItem menuItemModelo;
     private final JMenuItem menuItemCategoria;
-    private final JMenuItem menuItemTipoCombustivel;
+    private final JMenuItem menuItemCombustivel;
     private final JMenuItem menuItemVeiculo;
     
     private final JMenuItem menuItemCliente;
@@ -75,16 +77,16 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         this.statusBar = new StatusBar();
         
         menuCadastro = new JMenu("Cadastro");
-        subMenuVeiculo = new JMenu("Veiculo");
+        subMenuVeiculo = new JMenu("Veículo");
         menuOperacao = new JMenu("Operação");
         menuConsulta = new JMenu("Consulta");
         menuSistema = new JMenu("Sistema");
         menuAjuda = new JMenu("Ajuda");
         
         menuItemMontadora  = new JMenuItem("Montadora");
-        menuItemNomeVeiculo  = new JMenuItem("Nome do Veiculo");
+        menuItemModelo  = new JMenuItem("Modelo");
         menuItemCategoria  = new JMenuItem("Categoria");
-        menuItemTipoCombustivel  = new JMenuItem("Tipo de Combustivel");
+        menuItemCombustivel  = new JMenuItem("Combustivel");
         menuItemVeiculo = new JMenuItem("Veículo");
         menuItemCliente = new JMenuItem("Cliente");
         menuItemUsuario = new JMenuItem("Usuário");
@@ -104,9 +106,9 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         
         /* Cadastro */
         subMenuVeiculo.add(menuItemMontadora);
-        subMenuVeiculo.add(menuItemNomeVeiculo);
+        subMenuVeiculo.add(menuItemModelo);
         subMenuVeiculo.add(menuItemCategoria);
-        subMenuVeiculo.add(menuItemTipoCombustivel);
+        subMenuVeiculo.add(menuItemCombustivel);
         subMenuVeiculo.addSeparator();
         subMenuVeiculo.add(menuItemVeiculo);
         menuCadastro.add(subMenuVeiculo);
@@ -143,9 +145,9 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
     public void inicializa(){
         
         menuItemMontadora.addActionListener(this);
-        menuItemNomeVeiculo.addActionListener(this);
+        menuItemModelo.addActionListener(this);
         menuItemCategoria.addActionListener(this);
-        menuItemTipoCombustivel.addActionListener(this);
+        menuItemCombustivel.addActionListener(this);
         menuItemVeiculo.addActionListener(this);
         menuItemCliente.addActionListener(this);
         menuItemUsuario.addActionListener(this);
@@ -180,20 +182,20 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
             montadoraView.inicializa();
             jDesktopPane.add(montadoraView.getFrame());
         }
-        else if(evento.getSource().equals(menuItemNomeVeiculo)){
-            NomeVeiculoView nomeVeiculoView = new NomeVeiculoView();
-            nomeVeiculoView.inicializa();
-            jDesktopPane.add(nomeVeiculoView.getFrame()); 
+        else if(evento.getSource().equals(menuItemModelo)){
+            ModeloView modeloView = new ModeloView();
+            modeloView.inicializa();
+            jDesktopPane.add(modeloView.getFrame()); 
         }
         else if(evento.getSource().equals(menuItemCategoria)){
             CategoriaView categoriaView = new CategoriaView();
             categoriaView.inicializa();
             jDesktopPane.add(categoriaView.getFrame());
         }
-        else if(evento.getSource().equals(menuItemTipoCombustivel)){
-            TipoCombustivelView tipoCombustivelView = new TipoCombustivelView();
-            tipoCombustivelView.inicializa();
-            jDesktopPane.add(tipoCombustivelView.getFrame());
+        else if(evento.getSource().equals(menuItemCombustivel)){
+            CombustivelView combustivelView = new CombustivelView();
+            combustivelView.inicializa();
+            jDesktopPane.add(combustivelView.getFrame());
         }
         else if(evento.getSource().equals(menuItemVeiculo)){
             VeiculoView veiculoView = new VeiculoView();
@@ -206,9 +208,14 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
             jDesktopPane.add(clienteView.getFrame());
         }
         else if(evento.getSource().equals(menuItemUsuario)){
-            UsuarioView usuarioView = new UsuarioView();
-            usuarioView.inicializa();
-            jDesktopPane.add(usuarioView.getFrame());
+            if(UsuarioLogado.isAdminstrador()){
+                UsuarioView usuarioView = new UsuarioView();
+                usuarioView.inicializa();
+                jDesktopPane.add(usuarioView.getFrame());
+            }
+            else{
+                Mensagens.mensagemAviso("Voce não tem permissão para acessar esta funcionalidade!", "Acesso Negado");
+            }
         }
         else if(evento.getSource().equals(menuItemLocacao)){
             
@@ -228,6 +235,9 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         else if(evento.getSource().equals(menuItemReiniciar)){   
             LoginView loginView = new LoginView();
             loginView.inicializa();
+            UsuarioLogado.setLoginUsuario("");
+            UsuarioLogado.setNomeUsuario("");
+            UsuarioLogado.setAdminstrador(false);
             this.dispose();  
         }
         else if(evento.getSource().equals(menuItemSair)){
