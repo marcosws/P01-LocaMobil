@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package locamobil.view.util;
+package locamobil.global.util;
 
 /**
  *
  * @author Marcos
  */
-public interface IExecutaOperacao {
+public class Common {
     
-    void incluir();
-    void alterar();
-    void excluir();
-    void consultar();
-    void habilitaDesabilitaCampos();
+    public static boolean isNullOrEmpty(String valor){
+        return (valor == null || valor.isEmpty());
+    }
+    
 }

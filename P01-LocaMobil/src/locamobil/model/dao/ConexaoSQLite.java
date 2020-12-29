@@ -17,7 +17,7 @@ import org.sqlite.SQLiteConfig;
  */
 public class ConexaoSQLite {
     
-     private Properties connectionProperties = new Properties();
+    private Properties connectionProperties = new Properties();
     
     public Connection getConnection(){
         
@@ -31,7 +31,7 @@ public class ConexaoSQLite {
         String strConexao = "jdbc:sqlite:" + path + partialPath + dadosArqProperties.getNameDataBase();
         
         try{	
-            return DriverManager.getConnection(strConexao,connectionProperties);	
+            return DriverManager.getConnection(strConexao);	
 	}
 	catch(SQLException e){
             Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), "Conexao:");

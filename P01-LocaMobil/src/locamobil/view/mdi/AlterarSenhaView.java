@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import locamobil.controller.AlterarSenhaController;
+import locamobil.global.util.Mensagens;
 
 /**
  *
@@ -126,9 +128,34 @@ public class AlterarSenhaView  extends JFrame implements ActionListener{
             this.dispose();
         }
         else if(evento.getSource().equals(jbAlterarSenha)){
-            LoginView loginView = new LoginView();
-            loginView.inicializa();
-            this.dispose();
+            
+            AlterarSenhaController alterarSenhaController = new AlterarSenhaController();
+            switch(alterarSenhaController.alterarSenha(this))
+            {
+                case OK:
+                    LoginView loginView = new LoginView();
+                    loginView.inicializa();
+                    this.dispose();
+                    break;
+
+                case SENHA_DIFERENTE:
+                    /* Mensagem tratada na controller*/
+                    break;
+                    
+                case SENHA_VAZIA:
+                    /* Mensagem tratada na controller */
+                    break;
+                    
+                case USUARIO_INATIVO:
+                    Mensagens.mensagemErro("Usuario inativo!", "Alterar senha");
+                    break;
+                
+                default:
+                    Mensagens.mensagemErro("Login ou Senha Inválido!", "Alterar senha");
+                    break;
+                
+            }
+
         }
         else if(evento.getSource().equals(jbSair)){
             if(JOptionPane.showConfirmDialog(null, "Deseja sair do sistema?", "Login", JOptionPane.OK_CANCEL_OPTION) == 0){

@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
  *
  * @author Marcos
  */
-public class LocacaoConsultaView extends ControleChild {
+public class LocacoesView extends ControleChild {
 
-    public LocacaoConsultaView() {
+    public LocacoesView() {
         super("Consulta Locações", "Consulta locações em andamento.");
     }
 
@@ -43,7 +43,7 @@ public class LocacaoConsultaView extends ControleChild {
     }
 
     @Override
-    public void habilitaCampos() {
+    public void habilitaDesabilitaCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

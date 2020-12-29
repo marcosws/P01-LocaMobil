@@ -57,7 +57,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
     private final JMenuItem menuItemDevolucao;
     private final JMenuItem menuItemBaixa;
     
-    private final JMenuItem menuItemLocacaoCon;
+    private final JMenuItem menuItemLocacoes;
     
     private final JMenuItem menuItemInformacoes;
     private final JMenuItem menuItemReiniciar;
@@ -95,7 +95,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         menuItemDevolucao = new JMenuItem("Devolução");
         menuItemBaixa = new JMenuItem("Baixa");
         
-        menuItemLocacaoCon = new JMenuItem("Locação");
+        menuItemLocacoes = new JMenuItem("Locações");
         
         menuItemInformacoes = new JMenuItem("Informações");
         menuItemReiniciar = new JMenuItem("Reiniciar");
@@ -122,7 +122,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         menuOperacao.add(menuItemBaixa);
         
         /* Consulta */
-        menuConsulta.add(menuItemLocacaoCon);
+        menuConsulta.add(menuItemLocacoes);
         
         /* Sistema */
         menuSistema.add(menuItemInformacoes);
@@ -154,7 +154,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         menuItemLocacao.addActionListener(this);
         menuItemDevolucao.addActionListener(this);
         menuItemBaixa.addActionListener(this);
-        menuItemLocacaoCon.addActionListener(this);
+        menuItemLocacoes.addActionListener(this);
         menuItemInformacoes.addActionListener(this);
         menuItemReiniciar.addActionListener(this);
         menuItemSair.addActionListener(this);
@@ -226,7 +226,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
         else if(evento.getSource().equals(menuItemBaixa)){
             
         }
-        else if(evento.getSource().equals(menuItemLocacaoCon)){
+        else if(evento.getSource().equals(menuItemLocacoes)){
             
         }
         else if(evento.getSource().equals(menuItemInformacoes)){

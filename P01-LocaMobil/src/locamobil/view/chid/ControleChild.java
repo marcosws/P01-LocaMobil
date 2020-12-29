@@ -119,31 +119,31 @@ public abstract class ControleChild implements ActionListener, IExecutaOperacao{
             this.operacaoBotoesHabilita(false);
             operacao = Operacao.INCLUIR.getNomeOperacao();
             operacaoNome.setText(OperacaoNome.INCLUIR.getText());
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoAlterar)){
             this.operacaoBotoesHabilita(false);
             operacao = Operacao.ALTERAR.getNomeOperacao();
             operacaoNome.setText(OperacaoNome.ALTERAR.getText());
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoExcluir)){
             this.operacaoBotoesHabilita(false);
             operacao = Operacao.EXCLUIR.getNomeOperacao();
             operacaoNome.setText(OperacaoNome.EXCLUIR.getText());
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoConsultar)){
             this.operacaoBotoesHabilita(false);
             operacao = Operacao.CONSULTAR.getNomeOperacao();
             operacaoNome.setText(OperacaoNome.CONSULTAR.getText());
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoCancelar)){
             this.operacaoBotoesHabilita(true);
             operacaoNome.setText(OperacaoNome.SELECIONE_A_OPERACAO.getText());
             operacao = Operacao.CANCELAR.getNomeOperacao();
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoConfirmar)){
             this.operacaoBotoesHabilita(true);
@@ -161,7 +161,7 @@ public abstract class ControleChild implements ActionListener, IExecutaOperacao{
                 this.consultar();
             }
             operacao = "";
-            this.habilitaCampos();
+            this.habilitaDesabilitaCampos();
         }
         else if(evento.getSource().equals(botaoFechar)){
             this.getFrame().dispose();

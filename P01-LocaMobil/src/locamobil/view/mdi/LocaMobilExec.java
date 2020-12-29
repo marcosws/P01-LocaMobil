@@ -18,23 +18,7 @@ public class LocaMobilExec {
             LoginView loginView = new LoginView();
             loginView.inicializa();
         });
-    
-   //     UsuarioLogado.setAdminstrador(true);
-   //     UsuarioService usuarioService = new UsuarioService();
-   //     System.out.println("Valor: " + usuarioService.executaMensagemUsuario(Operacao.ALTERAR));
-     
-    // UsuarioDao usuarioDao = new UsuarioDao();
-   //  Usuario usuario = new Usuario();
-   //  usuario = usuarioDao.consultar("admin");
-    // System.out.println("Ativo: " + usuario.isAtivo());
-     
-     
-     // Montadora montadora = new Montadora();
-     // montadora.setNomeMontadora("AUDI");
-     // MontadoraDao montadoraDao = new MontadoraDao();
-     // montadoraDao.incluir(montadora);
-      
-        
+
     }
     
 }

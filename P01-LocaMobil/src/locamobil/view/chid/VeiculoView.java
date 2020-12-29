@@ -85,7 +85,7 @@ public class VeiculoView  extends ControleChild {
     }
 
     @Override
-    public void habilitaCampos() {
+    public void habilitaDesabilitaCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -6,6 +6,10 @@
 package locamobil.view.chid;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import locamobil.view.util.GridView;
+import locamobil.view.util.Operacao;
 import locamobil.view.util.PrincipalDimensao;
 
 /**
@@ -14,9 +18,60 @@ import locamobil.view.util.PrincipalDimensao;
  */
 public class CategoriaView extends ControleChild {
 
+    private JTextField jtfIdCategoria;
+    private JTextField jtfCategoria;
+    private GridView gridView;
+
+    public JTextField getJtfIdCategoria() {
+        return jtfIdCategoria;
+    }
+
+    public JTextField getJtfCategoria() {
+        return jtfCategoria;
+    }
+
+    public GridView getGridView() {
+        return gridView;
+    }
+    
     public CategoriaView() {
         
         super("Categoria", "Cadastro de Categoria");
+        
+        jtfIdCategoria = new JTextField();
+        jtfCategoria = new JTextField();
+        
+        JLabel lbIdCategoria = new  JLabel("Id:");
+        lbIdCategoria.setBounds(20, 120, 500, 20);
+        jtfIdCategoria.setBounds(20, 140, 100, 20);
+        jtfIdCategoria.setEditable(false);
+        
+        JLabel lbCategoria = new  JLabel("Categoria:");
+        lbCategoria.setBounds(20, 160, 500, 20);
+        jtfCategoria.setBounds(20, 180, 200, 20);
+        jtfCategoria.setEditable(false);
+        
+        JLabel lbCategoriasCadastradas = new JLabel("Categorias Cadastradas:");
+        lbCategoriasCadastradas.setBounds(20, 200, 500, 20);
+        gridView = new GridView();
+        gridView.getModel().addColumn("Id");
+        gridView.getModel().addColumn("Categorias"); 
+        gridView.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = gridView.getTable().getSelectedRow();
+                jtfIdCategoria.setText(gridView.getTable().getModel().getValueAt(row, 0).toString()); 
+                jtfCategoria.setText(gridView.getTable().getModel().getValueAt(row, 1).toString());
+            }
+        });
+        gridView.getjScrollPane().setBounds(20, 220, 700, 200);
+
+        panel.add(lbCategoria);
+        panel.add(lbIdCategoria);
+        panel.add(jtfIdCategoria);
+        panel.add(jtfCategoria);
+        panel.add(lbCategoriasCadastradas);
+        panel.add(gridView.getjScrollPane());
         
         
         frame.getContentPane().add(panel);
@@ -38,56 +93,60 @@ public class CategoriaView extends ControleChild {
         
     }
     
-    @Override
-    public void actionPerformed(ActionEvent evento) {
-        
-        if(evento.getSource().equals(botaoIncluir)){
-            
-        }
-        else if(evento.getSource().equals(botaoAlterar)){
-                
-        }
-        else if(evento.getSource().equals(botaoExcluir)){
-                
-        }
-        else if(evento.getSource().equals(botaoConsultar)){
-                
-        }
-        else if(evento.getSource().equals(botaoCancelar)){
-                
-        }
-        else if(evento.getSource().equals(botaoConfirmar)){
-                
-        }
-        else if(evento.getSource().equals(botaoFechar)){
-                
-        }
-        
+    private void habilitaDesabilitaCampos(boolean valor) {
+        jtfCategoria.setEditable(valor);
+    }
+
+    private void limpaCampos() {
+        jtfIdCategoria.setText("");
+        jtfCategoria.setText("");
     }
 
     @Override
     public void incluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void alterar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
-    public void habilitaCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void habilitaDesabilitaCampos() {
+        if(operacao.equals(Operacao.INCLUIR.getNomeOperacao())){
+            this.habilitaDesabilitaCampos(true);
+            this.limpaCampos();
+        }
+        else if(operacao.equals(Operacao.ALTERAR.getNomeOperacao())){
+            this.habilitaDesabilitaCampos(true);
+        }
+        else if(operacao.equals(Operacao.EXCLUIR.getNomeOperacao())){
+            this.habilitaDesabilitaCampos(false);
+        }
+        else if(operacao.equals(Operacao.CONSULTAR.getNomeOperacao())){
+            this.habilitaDesabilitaCampos(false);
+            this.limpaCampos();
+        }
+        else if(operacao.equals(Operacao.CANCELAR.getNomeOperacao())){
+            this.habilitaDesabilitaCampos(false);
+            this.limpaCampos();
+        }
+        else{
+            this.habilitaDesabilitaCampos(false);
+        } 
     }
+
+
     
 }

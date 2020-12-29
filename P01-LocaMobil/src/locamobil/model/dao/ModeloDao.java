@@ -12,128 +12,111 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import locamobil.global.util.Mensagens;
-import locamobil.model.entity.Montadora;
+import locamobil.model.entity.Modelo;
 
 /**
  *
  * @author Marcos
  */
-public class MontadoraDao {
+public class ModeloDao {
     
     private Connection connection;
     
-    /**
-     * public void incluir(Montadora montadora)
-     * @param montadora 
-     */
-    public void incluir(Montadora montadora){
-        
-        this.connection = new ConexaoSQLite().getConnection();
-        String sql = "INSERT INTO MONTADORA(NOME_MONTADORA) VALUES(?)";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, montadora.getNomeMontadora());
-            preparedStatement.execute();
-            this.connection.close();
-        }
-        catch(SQLException e){
-            Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
-        }
+    public void incluir(Modelo modelo){
     
-    }
-    /**
-     * public void alterar(Montadora montadora)
-     * @param montadora 
-     */
-    public void alterar(Montadora montadora){
-        
         this.connection = new ConexaoSQLite().getConnection();
-        String sql = "UPDATE MONTADORA SET NOME_MONTADORA=? WHERE ID_MONTADORA=?;";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, montadora.getNomeMontadora());
-            preparedStatement.setInt(2, montadora.getIdMontadora());
-            preparedStatement.execute();
-            preparedStatement.close();	
-            this.connection.close();
-        } 
-        catch (SQLException e) {
-            Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
-        }
-    }
-    /**
-     * 
-     * @param montadora 
-     */
-    public void excluir(Montadora montadora){
-        
-        this.connection = new ConexaoSQLite().getConnection();
+        String sql = "INSERT INTO MODELO (NOME_MODELO, ID_MONTADORA) VALUES (?,?)";
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MONTADORA WHERE ID_MONTADORA=?");
-            preparedStatement.setInt(1, montadora.getIdMontadora());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, modelo.getNomeModelo());
+            preparedStatement.setInt(2, modelo.getIdMontadora());
             preparedStatement.execute();
             preparedStatement.close();
             this.connection.close();
         }
-	catch(SQLException e){
+        catch(SQLException e){
             Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
-	}
-        
+        }
     }
-    /**
-     * public Montadora consultar(int idMontadora)
-     * @param idMontadora
-     * @return Montadora
-     */
-    public Montadora consultar(int idMontadora){
+    public void alterar(Modelo modelo){
         
         this.connection = new ConexaoSQLite().getConnection();
-        Montadora montadora = new Montadora();
+        String sql = "UPDATE MODELO SET NOME_MODELO=?, ID_MONTADORA=? WHERE ID_MODELO=?;";
         try{
-            PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM MONTADORA WHERE ID_MONTADORA=?"); 
-            preparedStatement.setInt(1,idMontadora);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, modelo.getNomeModelo());
+            preparedStatement.setInt(2, modelo.getIdMontadora());
+            preparedStatement.setInt(3, modelo.getIdModelo());
+            preparedStatement.execute();
+            preparedStatement.close();
+            this.connection.close();
+        }
+        catch(SQLException e){
+            Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
+        }
+        
+    }
+    public void excluir(Modelo modelo){
+        
+        this.connection = new ConexaoSQLite().getConnection();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MODELO WHERE ID_MODELO=?");
+            preparedStatement.setInt(1, modelo.getIdModelo());
+            preparedStatement.execute();
+            preparedStatement.close();
+            this.connection.close();
+        }
+        catch(SQLException e){
+            Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
+        }
+    }
+    public Modelo consultar(int idModelo){
+
+        this.connection = new ConexaoSQLite().getConnection();
+        Modelo modelo = new Modelo();
+        try{
+            PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM MODELO WHERE ID_MODELO=?");
+            preparedStatement.setInt(1, idModelo);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             if(!resultSet.isClosed()){
-                montadora.setIdMontadora(resultSet.getInt("ID_MONTADORA"));
-                montadora.setNomeMontadora(resultSet.getString("NOME_MONTADORA"));
+                modelo.setIdModelo(resultSet.getInt("ID_MODELO"));
+                modelo.setNomeModelo(resultSet.getString("NOME_MODELO"));
+                modelo.setIdMontadora(resultSet.getInt("ID_MONTADORA"));
                 resultSet.close();
             }
             this.connection.close();
-            return montadora;
+            return modelo;
         }
         catch(SQLException e){
             Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
         }
         return null;
+        
     }
-    /**
-     * public List Montadora consultar()
-     * @return 
-     */
-    public List<Montadora> consultar(){
+    public List<Modelo> consultar(){
         
         this.connection = new ConexaoSQLite().getConnection();
         try{
-            List<Montadora> montadoras = new ArrayList<Montadora>();
-            PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM MONTADORA;");
+            List<Modelo> modelos = new ArrayList<Modelo>();
+            PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM MODELO;");
             ResultSet resultSet = preparedStatement.executeQuery();
             if(!resultSet.isClosed()){
                 while(resultSet.next()){
-
-                    Montadora montadora = new Montadora();
-                    montadora.setIdMontadora(resultSet.getInt("ID_MONTADORA"));
-                    montadora.setNomeMontadora(resultSet.getString("NOME_MONTADORA"));
-
-                    montadoras.add(montadora);
+                    Modelo modelo = new Modelo();
+                    modelo.setIdModelo(resultSet.getInt("ID_MODELO"));
+                    modelo.setNomeModelo(resultSet.getString("NOME_MODELO"));
+                    modelo.setIdMontadora(resultSet.getInt("ID_MONTADORA"));
+                    modelos.add(modelo);
                 }
             }
             this.connection.close();
-            return montadoras;
+            return modelos;
         }
         catch(SQLException e){
             Mensagens.mensagemErro("Erro: " + e.getMessage() + "\nCódigo do Erro: " + e.getErrorCode(), this.getClass().getSimpleName());
         }
         return null;
     }
+    
 }

@@ -214,7 +214,7 @@ public class UsuarioView extends ControleChild {
         jcbAtivo.setEnabled(false);
     }
     @Override
-    public void habilitaCampos(){
+    public void habilitaDesabilitaCampos(){
         if(operacao.equals(Operacao.INCLUIR.getNomeOperacao())){
             jtfNomeUsuario.setEditable(true);
             jtfLogin.setEditable(true);

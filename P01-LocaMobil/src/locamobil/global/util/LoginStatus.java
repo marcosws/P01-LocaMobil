@@ -11,6 +11,8 @@ package locamobil.global.util;
  */
 public enum LoginStatus {
     
+    SENHA_VAZIA("SENHA_VAZIA"),
+    SENHA_DIFERENTE("SENHA_DIFERENTE"),
     LOGIN_SENHA_INVALIDO("LOGIN_SENHA_INVALIDO"),  
     USUARIO_INATIVO("USUARIO_INATIVO"),
     OK("OK");

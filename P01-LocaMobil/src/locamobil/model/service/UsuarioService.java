@@ -6,6 +6,7 @@
 package locamobil.model.service;
 
 import java.util.Arrays;
+import locamobil.global.util.Common;
 import locamobil.global.util.Mensagens;
 
 /**
@@ -40,36 +41,31 @@ public class UsuarioService {
         
     }
     public boolean verificaId(String id){
-        if(isNullOrEmpty(id)){
+        if(Common.isNullOrEmpty(id)){
             Mensagens.mensagemErro("Selecione um usuario!", "Usuario");
             return false;
         }
         return true;
     }
     public boolean verificaNome(String nome){
-        if(isNullOrEmpty(nome)){
+        if(Common.isNullOrEmpty(nome)){
             Mensagens.mensagemErro("O Campo Nome é obrigatório!", "Usuario");
             return false;
         }
         return true;
     }
     public boolean verificaLogin(String login){
-        if(isNullOrEmpty(login)){
+        if(Common.isNullOrEmpty(login)){
             Mensagens.mensagemErro("O Campo Login é obrigatório!", "Usuario");
             return false;
         }
         return true;
     }
     public boolean verificaSenha(String senha){
-        if(isNullOrEmpty(senha)){
+        if(Common.isNullOrEmpty(senha)){
             Mensagens.mensagemErro("O Campo Senha é obrigatório!", "Usuario");
             return false;
         }
         return true;
     }
-    private boolean isNullOrEmpty(String valor){
-        return (valor == null || valor.isEmpty());
-    }
-    
-    
 }
