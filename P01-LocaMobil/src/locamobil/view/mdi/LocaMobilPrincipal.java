@@ -6,6 +6,7 @@
 package locamobil.view.mdi;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -73,6 +74,7 @@ public class LocaMobilPrincipal extends JFrame implements ActionListener {
     public LocaMobilPrincipal(){
         
         this.jDesktopPane = new JDesktopPane();
+        this.jDesktopPane.setBackground(Color.DARK_GRAY);
         this.menuBarPrincipal = new JMenuBar();
         this.statusBar = new StatusBar();
         
